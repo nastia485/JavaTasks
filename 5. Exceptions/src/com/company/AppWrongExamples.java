@@ -1,6 +1,6 @@
 package com.company;
 
-/*
+
 class App2 {
     public static void main(String[] args) throws String {}
 }
@@ -54,7 +54,7 @@ class App10 {
     }
 }
 
- */
+ 
 
 class App14 {
     public static double sqr(double arg) {
