@@ -1,6 +1,5 @@
-package test.com.company;
+package company;
 
-import main.com.company.Model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
