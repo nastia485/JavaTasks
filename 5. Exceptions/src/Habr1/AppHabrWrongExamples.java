@@ -1,4 +1,4 @@
-package com.company;
+package Habr1;
 
 
 class App2 {
