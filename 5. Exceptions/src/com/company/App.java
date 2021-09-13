@@ -19,7 +19,7 @@ class App5 {
         throw new Error();
     }
 }
-*/
+
 
 class App11 {
     public double sqr(double arg) {
