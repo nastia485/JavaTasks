@@ -10,7 +10,7 @@ public class Main {
 
             Controller controller = new Controller(new View(), new Model());
 
-            controller.processUser();
+            controller.startProgram();
     }
 }
 

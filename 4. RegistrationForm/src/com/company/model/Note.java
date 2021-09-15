@@ -1,12 +1,15 @@
 package com.company.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 //pojo
 public class Note {
     private String secondName;
     private String firstName;
     private String patronymic;
-    private String nickname;
+    private String login;
     private String comment;
     private String homePhoneNumber;
     private String mobPhoneNumber;
@@ -22,7 +25,7 @@ public class Note {
     public Note(String secondName,
                 String firstName,
                 String patronymic,
-                String nickname,
+                String login,
                 String comment,
                 String homePhoneNumber,
                 String mobPhoneNumber,
@@ -36,7 +39,7 @@ public class Note {
         this.secondName = secondName;
         this.firstName = firstName;
         this.patronymic = patronymic;
-        this.nickname = nickname;
+        this.login = login;
         this.comment = comment;
         this.homePhoneNumber = homePhoneNumber;
         this.mobPhoneNumber = mobPhoneNumber;
@@ -51,6 +54,9 @@ public class Note {
 
     public Note(){}
 
+    String[] logins  = new String[] {"qwerty123", "1h1h1h1h", "myLogin321", "login314"};
+
+
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
@@ -63,8 +69,8 @@ public class Note {
         this.patronymic = patronymic;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public void setComment(String comment) {
@@ -109,4 +115,7 @@ public class Note {
         this.addressString = addressString;
     }
 
+    public String getLogin() {
+        return login;
+    }
 }

@@ -1,16 +1,15 @@
 package com.company.controller;
 
-import com.company.model.Group;
-import com.company.model.Model;
-import com.company.model.Note;
+import com.company.model.*;
 import com.company.view.View;
-import com.company.model.Address;
 
 
 import java.util.Scanner;
 
 import static com.company.controller.RegexContainer.*;
 import static com.company.view.TextConstant.*;
+import static com.company.view.View.*;
+import static com.company.view.View.FIRST_NOTE;
 
 
 public class Controller {
@@ -22,7 +21,15 @@ public class Controller {
         this.model = model;
     }
 
-    public void processUser() {
+    public void startProgram() {
+        Scanner scanner = new Scanner(System.in);
+        printMessage(FIRST_NOTE);
+        do {
+            inputData(scanner);
+        } while (doesUserWantToContinue(scanner));
+    }
+
+    public void inputData(Scanner scanner) {
         Scanner sc = new Scanner(System.in);
         Note note = new Note();
         Address address = new Address();
@@ -34,9 +41,22 @@ public class Controller {
 
         note.setFirstName(inputController.inputStringValueWithScanner(FIRST_NAME, str1));
 
-        note.setNickname(inputController.inputStringValueWithScanner(LOGIN, REGEX_LOGIN_UNI));
+        String enteredLogin = inputController.inputStringValueWithScanner(LOGIN, REGEX_LOGIN_UNI);
 
-        String str2 = (String.valueOf(View.bundle.getLocale()).equals("ua")) ? REGEX_SURNAME_UKR : REGEX_SURNAME_EN;
+        while (true) {
+            try {
+                checkLoginAlreadyExists(enteredLogin);
+            } catch (LoginAlreadyExistsException e) {
+                printMessage(concatenationString(LOGIN_EXISTS, enteredLogin, LOGIN_INPUT));
+                enteredLogin = inputController.inputStringValueWithScanner(LOGIN, REGEX_LOGIN_UNI);
+                continue;
+            }
+            note.setLogin(enteredLogin);
+            break;
+        }
+
+
+        /* String str2 = (String.valueOf(View.bundle.getLocale()).equals("ua")) ? REGEX_SURNAME_UKR : REGEX_SURNAME_EN;
 
         note.setSecondName(inputController.inputStringValueWithScanner(SURNAME, str2));
 
@@ -90,7 +110,30 @@ public class Controller {
 
         note.setAddressString(address.toString());
 
-        model.setNote(note);
+         */
 
+        model.addNote(note);
+
+    }
+
+    public void checkLoginAlreadyExists(String enteredLogin) throws LoginAlreadyExistsException {
+        for (int i = 0; i < model.notes.size(); i++) {
+            if (enteredLogin.equals(model.getLoginFromCertainNote(i))) {
+                throw new LoginAlreadyExistsException();
+            } else {
+                continue;
+            }
+        }
+    }
+
+
+    public boolean doesUserWantToContinue(Scanner sc) {
+        printMessage(QUESTION_TO_USER);
+        String answer = sc.next();
+        while (!answer.equals("Yes") && !answer.equals("No")) {
+            printMessage(COMMAND_TO_CONTINUE_ENTERING);
+            answer = sc.next();
+        }
+        return answer.equals("Yes");
     }
 }
