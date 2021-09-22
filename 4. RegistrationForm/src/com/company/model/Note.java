@@ -54,8 +54,6 @@ public class Note {
 
     public Note(){}
 
-    String[] logins  = new String[] {"qwerty123", "1h1h1h1h", "myLogin321", "login314"};
-
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
